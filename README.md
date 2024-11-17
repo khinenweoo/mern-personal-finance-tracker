@@ -5,8 +5,7 @@
 
 About This Project:
 
--   Tech Stack: React.js, Node.js, Express.js, MongoDB, Chakra UI
--   Build an API
+-   Tech Stack: React.js, Node.js, Express.js, MongoDB
 -   Error Handling
 -   Deployment
 
