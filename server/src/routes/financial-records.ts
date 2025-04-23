@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { createRecord, deleteRecord, getRecords, updateRecord } from "../controllers/record.controller";
 import FinancialRecordModel from "../schema/financial-record";
 
-
+// define all API endpoints/ routes
 const router = express.Router();
 
 router.get("/getAllByUserID/:userId", async (req: Request, res: Response) => {

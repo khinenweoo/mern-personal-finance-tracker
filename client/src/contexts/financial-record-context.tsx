@@ -24,6 +24,8 @@ export const FinancialRecordsContext = createContext<
     FinancialRecordContextType | undefined
 >(undefined);
 
+// create component which gonna be provider
+// children from whichever components we wrap this around with
 export const FinancialRecordsProvider = ({
     children,
   }: {
@@ -35,7 +37,7 @@ export const FinancialRecordsProvider = ({
     const fetchRecords = async () => {
       if (!user) return;
       const response = await fetch(
-        `http://localhost:3001/financial-records/getAllByUserID/${user.id}`
+        `http://localhost:27001/financial-records/getAllByUserID/${user.id}`
       );
   
       if (response.ok) {
@@ -52,7 +54,7 @@ export const FinancialRecordsProvider = ({
 
 
     const addRecord = async (record: FinancialRecord) => {
-      const response = await fetch("http://localhost:3001/financial-records", {
+      const response = await fetch("http://localhost:27001/financial-records", {
         method: "POST", 
         body: JSON.stringify(record),
         headers: {
@@ -110,6 +112,8 @@ export const FinancialRecordsProvider = ({
         }
     }
 
+    // inside of this is just render children
+    // value are the state -> records and all the functions we created inside this provider
     return (
     <FinancialRecordsContext.Provider value={{ records, addRecord, updateRecord, deleteRecord }}>
       {""}

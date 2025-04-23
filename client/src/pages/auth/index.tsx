@@ -1,26 +1,24 @@
-import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignIn } from "@clerk/clerk-react";
 import { Navigate } from "react-router-dom";
 import './auth.css';
+import SvgImageComponent from "../../components/SvgImageComponent";
 
 export const Auth = () => {
-    return (
-        <div className="auth-container">
-            <div className="auth-content">
-                <div className="auth-left">
-                    <h1>Welcome to Finance Tracker App</h1>
-                    <p>Start your journey with us today</p>
-                </div>
 
-                <div className="auth-right">
+    return (
+        <div className="auth-container flex h-screen mx-auto dark:bg-black">
+            {/* Left Pane */}
+            <div className="lg:flex items-center justify-center flex-1 text-black">
+                <div className="max-w-lg text-center">
+                    <SvgImageComponent />
+                </div>
+            </div>
+
+            {/* Right Pane */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center">
+                <div className="max-w-md w-full p-6">
                     <SignedOut>
-                        <div className="button-group">
-                            <div className="signup-button">
-                                <SignUpButton mode="modal" />
-                            </div>
-                            <div className="signin-button">
-                                <SignInButton mode="modal" />
-                            </div>
-                        </div>
+                        <SignIn />
                     </SignedOut>
                     <SignedIn>
                         <Navigate to="/" />

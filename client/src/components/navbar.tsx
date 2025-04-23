@@ -1,29 +1,92 @@
-import { SignedIn, UserButton } from "@clerk/clerk-react";
+import { SignedIn, UserButton, useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
+import { Img } from 'react-image';
+import ModalComponent from "./ModalComponent";
+import { useState } from "react";
+import { FinancialRecordForm } from "../pages/dashboard/financial-record-form";
 
 export const Navbar = () => {
+    const logoUrl = '/logo-white.png';
+    const [open, setOpen] = useState(false);
+    const { user } = useUser();
+
     return (
-        <nav className="navbar">
-            <div className="navbar-container">
-                <div className="navbar-brand">
-                    <Link to="/">
-                        <span className="navbar-logo">💰</span>
-                        <span className="navbar-title">FinanceTracker</span>
-                    </Link>
+        <>
+            <div className="relative w-[10%] hidden md:block border-r border-gray-200 bg-white">
+                <div className="text-gray-900">
+                    <aside className="flex w-full h-full flex-col items-center">
+                        <div className="flex h-[6rem] w-full items-center justify-center border-b border-gray-200 p-2">
+                            <Link to="/">
+                                <Img
+                                    src={logoUrl}
+                                    alt="logo"
+                                    width={40}
+                                    height={90}
+                                />
+                            </Link>
+                        </div>
+                        <nav className="flex flex-1 flex-col gap-y-4 pt-10">
+                            <button onClick={() => setOpen(true)} className="group rounded-xl p-4 text-gray-400 hover:bg-gray-100">
+                                <i className='bx bx-plus-circle text-xl lg:text-2xl'></i>
+                                <span className="text-xs mt-1 text-gray-400 block">New Expense</span>
+                            </button>
+                            <button className="group rounded-xl p-4 text-gray-400 hover:bg-gray-100">
+                                <i className='bx bxs-category text-lg lg:text-xl'></i>
+                                <span className="text-xs mt-1 text-gray-400 block">Categories</span>
+                            </button>
+
+                            <button className={`mt-2 ${open ? "invisible" : "visible"}`}>
+                                <SignedIn>
+                                    <UserButton
+                                        afterSignOutUrl="/auth"
+                                        appearance={{
+                                            elements: {
+                                                avatarBox: "navbar-user-button"
+                                            }
+                                        }}
+                                    />
+                                </SignedIn>
+                            </button>
+                            <h2 className="user-name p-2 flex items-center justify-center rounded-2xl m-2">{ user?.firstName } { user?.lastName }</h2>
+                        </nav>
+                    </aside>
                 </div>
-                <div className="navbar-actions">
-                    <SignedIn>
-                        <UserButton 
-                            afterSignOutUrl="/auth"
-                            appearance={{
-                                elements: {
-                                    avatarBox: "navbar-user-button"
-                                }
-                            }}
-                        />
-                    </SignedIn>
-                </div>
+
+                {/*  */}
+                <ModalComponent open={open} onClose={() => setOpen(false)} >
+                    <FinancialRecordForm />
+                </ModalComponent>
             </div>
-        </nav>
+            {/* navbar in mobile viewport */}
+            <div className="fixed top-0 left-0 right-0 z-10 bg-black backdrop-blur-lg bg-opacity-30 rounded-b-2xl text-white shadow-t-lg md:hidden flex justify-between px-3 items-center py-2 border-b border-gray-700">
+                <nav className="navbar">
+                    <div className="navbar-container">
+                        <div className="navbar-brand">
+                            <Link to="/">
+                                <Img
+                                    src={logoUrl}
+                                    alt="logo"
+                                    width={30}
+                                    height={60}
+                                />
+                            </Link>
+                        </div>
+                        <div className="navbar-actions">
+                            <SignedIn>
+                                <UserButton
+                                    afterSignOutUrl="/auth"
+                                    appearance={{
+                                        elements: {
+                                            avatarBox: "navbar-user-button"
+                                        }
+                                    }}
+                                />
+                            </SignedIn>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+        </>
     );
 };

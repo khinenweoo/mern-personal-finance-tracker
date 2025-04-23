@@ -8,7 +8,7 @@ interface FinancialRecord {
     category: string;
     paymentMethod: string;
 }
-
+// define the schema
 const financialRecordSchema = new mongoose.Schema<FinancialRecord>({
     userId: { type: String, required: true},
     date: { type: Date, required: true},
@@ -18,6 +18,7 @@ const financialRecordSchema = new mongoose.Schema<FinancialRecord>({
     paymentMethod: { type: String, required: true},
 });
 
+// create a model and give a name to this collection db called 'FinancialRecord'
 const FinancialRecordModel = mongoose.model<FinancialRecord>("FinancialRecord", financialRecordSchema);
 
 export default FinancialRecordModel;

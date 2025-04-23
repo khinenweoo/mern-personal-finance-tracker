@@ -1,16 +1,18 @@
+
 :root {
   --navbar-height: 70px;
-  --primary-color: #6366f1;
-  --primary-dark: #4f46e5;
+  --primary-color: #fef3c6;
+  --primary-dark: #4f555c;
+  --background-gray: #e5e7e9;
   --text-light: #ffffff;
   --text-dark: #1f2937;
   --background-light: #f9fafb;
+  --bg-light-purple: #a855f720;
 }
 
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -112,41 +114,25 @@
 body {
   padding-top: var(--navbar-height);
   margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  padding: 0;
+  font-family: "Prompt", sans-serif;
+  font-weight: 300;
   background-color: var(--background-light);
   color: var(--text-dark);
 }
 
 /* Dashboard header styles */
-.dashboard-header {
+.stats-cards {
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
-  margin-bottom: 2rem;
-  padding: 2rem;
-  background: var(--text-light);
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.welcome-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.welcome-section h1 {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--text-dark);
-  margin: 0;
-  opacity: 0.9;
+  align-items: center;
 }
 
 .user-name {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--primary-color);
+  background-color: var(--bg-light-purple);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary-dark);
   margin-top: 0.25rem;
 }
 
@@ -156,13 +142,8 @@ body {
 }
 
 .total-card {
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-  padding: 1.5rem 2rem;
-  border-radius: 1rem;
-  min-width: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   transition: transform 0.2s;
 }
 
@@ -178,9 +159,8 @@ body {
 }
 
 .total-amount {
-  color: var(--text-light);
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 500;
   margin-top: 0.5rem;
   letter-spacing: -0.025em;
 }

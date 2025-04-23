@@ -1,27 +1,73 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Dashboard } from './pages/dashboard';
 import { Auth } from './pages/auth';
 import { FinancialRecordsProvider } from './contexts/financial-record-context';
+import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { Navbar } from './components/navbar';
-
-
+import { useState, useEffect } from "react";
 
 function App() {
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+      setDarkMode(!darkMode)
+  }
+
+  useEffect(() => {
+      if(darkMode) {
+          document.documentElement.classList.add('dark')
+      } else {
+          document.documentElement.classList.remove('dark')
+      }
+  }, [darkMode])
 
   return (
     <Router>
       <div className='app-container'>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={
-            <FinancialRecordsProvider>
-              <Dashboard/>
-            </FinancialRecordsProvider>
-            } 
-          />
-          <Route path='/auth' element={<Auth/>} />
-        </Routes>
+        <div className='bg-neutral-100 dark:bg-neutral-950 relative overflow-hidden'>
+            <button 
+              onClick={toggleDarkMode}
+              className='fixed top-3 lg:top-4 right-3 lg:right-4 w-9 h-9 lg:w-10 lg:h-10 flex justify-center items-center rounded-xl bg-amber-100 dark:bg-gray-700 text-neutrak-950 shadow-lg transition-colors'>
+              <i className={`bx bx-${darkMode ? 'sun text-amber-200': 'moon'} text-lg lg:text-xl`}></i>
+            </button>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <SignedIn>
+                      <div className='dashboard-wrapper w-full flex'>
+
+                        <FinancialRecordsProvider>
+                        <Navbar />
+                          <Dashboard />
+                        </FinancialRecordsProvider>
+                      </div>
+                    </SignedIn>
+                    <SignedOut>
+                      <Navigate to="/auth" replace />
+                    </SignedOut>
+                  </>
+                }
+              />
+
+              <Route 
+                path="/auth" 
+                element={
+                  <>
+                    <SignedIn>
+                      <Navigate to="/" replace />
+                    </SignedIn>
+                    <SignedOut>
+                      <Auth />
+                    </SignedOut>
+                  </>
+                } 
+              />
+            </Routes>
+        </div>
       </div>
     </Router>
   )
