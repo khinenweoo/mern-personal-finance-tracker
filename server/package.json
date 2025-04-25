@@ -3,9 +3,9 @@
     "typescript": "^5.6.3"
   },
   "scripts": {
-    "start": "node ./server/build/index.ts",
+    "start": "node ./build/index.ts",
     "build": "tsc -p .",
-    "dev": "nodemon ./server/src/index.ts"
+    "dev": "nodemon ./src/index.ts"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
