@@ -15,6 +15,7 @@
     "@tailwindcss/vite": "^4.0.17",
     "@types/react-table": "^7.7.20",
     "boxicons": "^2.1.4",
+    "date-fns": "^4.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.5.2",
