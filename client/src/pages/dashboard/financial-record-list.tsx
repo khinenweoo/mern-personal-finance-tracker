@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { FinancialRecord, useFinancialRecords } from "../../contexts/financial-record-context";
 import { useTable, Column, CellProps } from "react-table";
 import { format } from 'date-fns';
@@ -44,6 +44,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
         </div>
     )
 }
+
 
 export const FinancialRecordList = () => {
     const { records, updateRecord, deleteRecord } = useFinancialRecords();
@@ -128,14 +129,43 @@ export const FinancialRecordList = () => {
         },
     ], [records]);
 
+    const [ filterInput, setFilterInput ] = useState('');
+   
+
+    const filteredData = records.filter(record => {
+        let searchTerm = String(filterInput.toLowerCase());
+
+        if (searchTerm === '') {
+            return true;
+        }
+
+        return (
+            record.description?.toLowerCase().includes(searchTerm) ||
+            record.category?.toLowerCase().includes(searchTerm) ||
+            String(record.amount).includes(searchTerm) ||
+            record.paymentMethod?.toLowerCase().includes(searchTerm) 
+        );
+ 
+      });
+
+
+
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-        useTable({
-            columns,
-            data: records,
-        });
+    useTable({
+        columns,
+        data: filteredData,
+    },
+);
+    
     return (
         <div className="table-container expense-card-container p-2 block max-w-full sm:overflow-x-scroll lg:overflow-auto overflow-y-hidden">
             <div className="h-full">
+            <input
+                value={filterInput}
+                onChange={e => setFilterInput(e.target.value)}
+                placeholder="Search..."
+                className="input"
+            />
                 <table {...getTableProps()} className="table w-full">
                     <thead>
                         {headerGroups.map(headerGroup => {

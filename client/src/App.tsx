@@ -6,6 +6,7 @@ import { FinancialRecordsProvider } from './contexts/financial-record-context';
 import { SignedIn, SignedOut } from '@clerk/clerk-react';
 import { Navbar } from './components/navbar';
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
                           <Dashboard />
                         </FinancialRecordsProvider>
                       </div>
+                      <Toaster position="top-right" />
                     </SignedIn>
                     <SignedOut>
                       <Navigate to="/auth" replace />

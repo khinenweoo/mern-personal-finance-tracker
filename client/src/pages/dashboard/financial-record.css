@@ -67,9 +67,9 @@
 
 .table th {
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 500;
   padding: 1rem;
-  text-align: left;
+  text-align: center;
   border-bottom: 2px solid var(--border-color);
 }
 

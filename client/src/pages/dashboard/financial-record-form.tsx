@@ -74,10 +74,15 @@ export const FinancialRecordForm = () => {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">Select a Category</option>
-              <option value="Food">Food</option>
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Health">Health</option>
+              <option value="Groceries">Groceries</option>
+              <option value="Education">Education</option>
               <option value="Rent">Rent</option>
-              <option value="Salary">Salary</option>
-              <option value="Utilities">Utilities</option>
+              <option value="Housing">Housing</option>
+              <option value="Travel">Travel</option>
               <option value="Entertainment">Entertainment</option>
               <option value="Other">Other</option>
             </select>
@@ -93,8 +98,8 @@ export const FinancialRecordForm = () => {
               onChange={(e) => setPaymentMethod(e.target.value)}
             >
               <option value="">Select a Payment Method</option>
-              <option value="Credit Card">Credit Card</option>
               <option value="Cash">Cash</option>
+              <option value="Mobile Banking">Mobile Banking</option>
               <option value="Bank Transfer">Bank Transfer</option>
             </select>
           </div>
