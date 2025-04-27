@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/controllers/record.controller.ts","./src/routes/financial-records.ts","./src/schema/financial-record.ts"],"version":"5.6.3"}

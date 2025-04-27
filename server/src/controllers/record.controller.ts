@@ -15,6 +15,16 @@ export const getRecords = async (req: Request, res: Response) => {
     }
 };
 
+export const testRoute = async (req: Request, res: Response) => {
+    const path = req.path;
+
+    if (path === "/testing") {
+        return "Testing Route";
+    }
+
+    return "Hello Smart Spender";
+}
+
 export const createRecord = async (req: Request, res: Response) => {
     try {
         const newRecordBody = req.body;
