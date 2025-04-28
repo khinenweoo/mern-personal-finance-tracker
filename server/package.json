@@ -1,7 +1,8 @@
 {
-  "devDependencies": {
-    "typescript": "^5.6.3"
-  },
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "build": "tsc --build",
     "start": "node ./build/index.js",
@@ -16,6 +17,9 @@
     "express": "^4.21.1",
     "mongoose": "^8.8.1",
     "nodemon": "^3.1.7",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
   }
 }
+
+

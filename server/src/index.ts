@@ -37,6 +37,9 @@ app.use(cors());
 mongoose.connect(mongoURI).then(() => console.log("CONNECTED TO MONGODB!")).catch((err) => console.error("Failed to Connect to MongoDB:", err));
 
 app.use("/financial-records", financialRecordRouter);
+app.get("/", (req, res) => {
+    res.status(200).json("Welcome, the app is working well on home");
+})
 
 app.listen(port, () => {
     console.log(`Server Running on Port ${port}`);
