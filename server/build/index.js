@@ -26,14 +26,14 @@ const handleServerError = (error) => {
     }
 };
 const mongoURI = process.env.MONGO_URI || "http://localhost:3000/";
+const originURL = process.env.FRONTEND_URL || "";
+const corsOptions = {
+    origin: originURL, // Replace with your frontend URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
 app.use(express_1.default.json());
-// Allow requests from your frontend domain
-const allowedOrigins = ['http://localhost:5173/'];
-app.use((0, cors_1.default)({
-    origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true // if you need to include cookies in requests
-}));
+app.use((0, cors_1.default)(corsOptions));
 mongoose_1.default.connect(mongoURI).then(() => console.log("CONNECTED TO MONGODB!")).catch((err) => console.error("Failed to Connect to MongoDB:", err));
 app.use("/financial-records", financial_records_1.default);
 app.listen(port, () => {

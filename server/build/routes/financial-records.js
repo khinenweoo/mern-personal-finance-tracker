@@ -16,7 +16,7 @@ const express_1 = __importDefault(require("express"));
 const record_controller_1 = require("../controllers/record.controller");
 // define all API endpoints/ routes
 const router = express_1.default.Router();
-router.get("/testing", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, record_controller_1.testRoute)(req, res);
 }));
 router.get("/getAllByUserID/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
