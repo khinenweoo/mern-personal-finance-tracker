@@ -24,14 +24,14 @@ const handleServerError = (error: any) => {
 
 const mongoURI: string = process.env.MONGO_URI || "http://localhost:3000/";
 // const originURL: string = process.env.FRONTEND_URL || "";
-const corsOptions = {
-    origin: 'https://personal-finance-tracker-sage-alpha.vercel.app', // Only allow this origin
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-};
+// const corsOptions = {
+//     origin: originURL, // Replace with your frontend URL
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+// };
 
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 mongoose.connect(mongoURI).then(() => console.log("CONNECTED TO MONGODB!")).catch((err) => console.error("Failed to Connect to MongoDB:", err));
