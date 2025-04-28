@@ -17,10 +17,10 @@ export const Dashboard = () => {
 
     return (
         <div className="dashboard-container w-[89%] p-8 my-14 md:my-5">
-            <div className="w-full mx-auto p-6 rounded-xl shadow-sm border border-gray-100 overflow-hidden bg-white mb-6">
+            <div className="w-full mx-auto overflow-hidden mb-6 p-4">
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 gap-6 w-full min-w-0">
 
-                    <div className="total-card flex flex-col px-6 py-2 bg-gray-50 shadow-md rounded-lg">
+                    <div className="total-card flex flex-col px-6 py-2 border bg-gray-50 dark:bg-slate-800 dark:border-gray-600 shadow-md rounded-xl">
                         <div className="flex flex-col space-y-2">
                             <div className="text-6xl font-bold tracking-tight leading-none text-red-300">
                                 {/* <i className='bx bx-money-withdraw text-6xl'></i> */}
@@ -31,7 +31,7 @@ export const Dashboard = () => {
                         </div>
                     </div>
 
-                    <div className="total-card flex flex-col px-6 py-2 bg-gray-50 shadow-md rounded-lg">
+                    <div className="total-card flex flex-col px-6 py-2 border bg-gray-50 dark:bg-slate-800 dark:border-gray-600 shadow-md rounded-lg">
                         <div className="flex flex-col space-y-2">
                             <div className="text-6xl font-bold tracking-tight leading-none text-green-300">
                                 <i className='bx bx-credit-card-front text-6xl'></i>
@@ -43,7 +43,7 @@ export const Dashboard = () => {
                         </div>
                     </div>
 
-                    <div className="total-card flex flex-col px-6 py-2 bg-gray-50 shadow-md rounded-lg">
+                    <div className="total-card flex flex-col px-6 py-2 border bg-gray-50 dark:bg-slate-800 dark:border-gray-600 shadow-md rounded-lg">
                         <div className="flex flex-col space-y-2">
                             <div className="text-6xl font-bold tracking-tight leading-none text-orange-300">
                                 <i className='bx bx-wallet text-6xl'></i>
@@ -53,7 +53,7 @@ export const Dashboard = () => {
                         </div>
                     </div>
 
-                    <div className="total-card flex flex-col px-6 py-2 bg-gray-50 shadow-md rounded-lg">
+                    <div className="total-card flex flex-col px-6 py-2 border bg-gray-50 dark:bg-slate-800 dark:border-gray-600 shadow-md rounded-lg">
                         <div className="flex flex-col space-y-2">
                             <div className="text-6xl font-bold tracking-tight leading-none text-blue-300">
                                 <i className='bx bxl-deezer text-6xl'></i>

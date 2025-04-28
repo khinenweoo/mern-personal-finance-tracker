@@ -5,23 +5,22 @@ import ModalComponent from "./ModalComponent";
 import { useState } from "react";
 import { FinancialRecordForm } from "../pages/dashboard/financial-record-form";
 
-export const Navbar = () => {
-    const logoUrl = '/logo-white.png';
+const Navbar: React.FC<{ darkMode: boolean; }> = ({ darkMode }) => {
+    const logoUrl = darkMode? '/logo-dark.png' : '/logo-white.png';
     const [open, setOpen] = useState(false);
     const { user } = useUser();
-
     return (
         <>
-            <div className="relative w-[10%] hidden md:block border-r border-gray-200 bg-white">
+            <div className="relative w-[10%] hidden md:block border-r bg-white dark:bg-slate-800 border-gray-200 dark:border-gray-600">
                 <div className="text-gray-900">
                     <aside className="flex w-full h-full flex-col items-center">
-                        <div className="flex h-[6rem] w-full items-center justify-center border-b border-gray-200 p-2">
+                        <div className="flex h-[6rem] w-full items-center justify-center">
                             <Link to="/">
                                 <Img
                                     src={logoUrl}
                                     alt="logo"
-                                    width={40}
-                                    height={90}
+                                    width={90}
+                                    height={70}
                                 />
                             </Link>
                         </div>
@@ -47,7 +46,7 @@ export const Navbar = () => {
                                     />
                                 </SignedIn>
                             </button>
-                            <h2 className="user-name p-2 flex items-center justify-center rounded-2xl m-2">{ user?.firstName } { user?.lastName }</h2>
+                            <h2 className="user-name p-2 flex items-center justify-center rounded-2xl dark:bg-sky-950 m-2">{ user?.firstName } { user?.lastName }</h2>
                         </nav>
                     </aside>
                 </div>
@@ -60,13 +59,13 @@ export const Navbar = () => {
             {/* navbar in mobile viewport */}
             <div className="fixed top-0 left-0 right-0 z-10 bg-black backdrop-blur-lg bg-opacity-30 rounded-b-2xl text-white shadow-t-lg md:hidden flex justify-between px-3 items-center py-2 border-b border-gray-700">
                 <nav className="navbar">
-                    <div className="navbar-container">
+                    <div className="navbar-container dark:bg-slate-800">
                         <div className="navbar-brand">
                             <Link to="/">
                                 <Img
                                     src={logoUrl}
                                     alt="logo"
-                                    width={30}
+                                    width={80}
                                     height={60}
                                 />
                             </Link>
@@ -89,4 +88,6 @@ export const Navbar = () => {
 
         </>
     );
-};
+}
+
+export default Navbar;

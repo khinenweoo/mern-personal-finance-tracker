@@ -25,7 +25,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
     return (
         <div
-            className={`editable-cell ${editable ? 'editable' : ''}`}
+            className={`editable-cell ${editable ? 'editable dark:text-gray-300 hover:text-blue-600' : 'dark:text-gray-300'}`}
             onClick={() => editable && setIsEditing(true)}
         >
             {isEditing ? (
@@ -158,24 +158,24 @@ export const FinancialRecordList = () => {
 );
     
     return (
-        <div className="table-container expense-card-container p-2 block max-w-full sm:overflow-x-scroll lg:overflow-auto overflow-y-hidden">
+        <div className="table-container expense-card-container bg-white dark:bg-slate-800 p-2 block max-w-full sm:overflow-x-scroll lg:overflow-auto overflow-y-hidden">
             <div className="h-full">
             <input
                 value={filterInput}
                 onChange={e => setFilterInput(e.target.value)}
                 placeholder="Search..."
-                className="input"
+                className="input text-slate-950 dark:text-white"
             />
                 <table {...getTableProps()} className="table w-full">
                     <thead>
                         {headerGroups.map(headerGroup => {
                             const { key, ...headerGroupProps } = headerGroup.getHeaderGroupProps();
                             return (
-                                <tr key={key} {...headerGroupProps} className="bg-gray-50 rounded-xl shadow-sm border border-gray-100">
+                                <tr key={key} {...headerGroupProps} className="bg-gray-50 dark:bg-slate-800 rounded-xl shadow-sm border border-gray-300 dark:border-gray-700">
                                     {headerGroup.headers.map(column => {
                                         const { key, ...headerProps } = column.getHeaderProps();
                                         return (
-                                            <th key={key} {...headerProps}>
+                                            <th className="text-gray-950 dark:text-gray-300 " key={key} {...headerProps}>
                                                 {column.render('Header')}
                                             </th>
                                         );
@@ -190,7 +190,7 @@ export const FinancialRecordList = () => {
                             prepareRow(row);
                             const { key, ...rowProps } = row.getRowProps();
                             return (
-                                <tr className="expense-card" key={key} {...rowProps}>
+                                <tr className="expense-card border border-b-blue-200 dark:border-gray-300 hover:bg-white dark:hover:bg-gray-700" key={key} {...rowProps}>
                                     {row.cells.map(cell => {
                                         const { key, ...cellProps } = cell.getCellProps();
                                         return (

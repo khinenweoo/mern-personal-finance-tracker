@@ -4,7 +4,7 @@ import { Dashboard } from './pages/dashboard';
 import { Auth } from './pages/auth';
 import { FinancialRecordsProvider } from './contexts/financial-record-context';
 import { SignedIn, SignedOut } from '@clerk/clerk-react';
-import { Navbar } from './components/navbar';
+import Navbar from './components/navbar';
 import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 
@@ -27,7 +27,7 @@ function App() {
   return (
     <Router>
       <div className='app-container'>
-        <div className='bg-neutral-100 dark:bg-neutral-950 relative overflow-hidden'>
+        <div className='bg-neutral-100 dark:bg-slate-950 relative overflow-hidden'>
             <button 
               onClick={toggleDarkMode}
               className='fixed top-3 lg:top-4 right-3 lg:right-4 w-9 h-9 lg:w-10 lg:h-10 flex justify-center items-center rounded-xl bg-amber-100 dark:bg-gray-700 text-neutrak-950 shadow-lg transition-colors'>
@@ -42,7 +42,7 @@ function App() {
                       <div className='dashboard-wrapper w-full flex'>
 
                         <FinancialRecordsProvider>
-                        <Navbar />
+                        <Navbar darkMode={darkMode}/>
                           <Dashboard />
                         </FinancialRecordsProvider>
                       </div>

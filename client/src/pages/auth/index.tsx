@@ -6,7 +6,7 @@ import SvgImageComponent from "../../components/SvgImageComponent";
 export const Auth = () => {
 
     return (
-        <div className="auth-container flex h-screen mx-auto dark:bg-black">
+        <div className="auth-container flex h-screen mx-auto">
             {/* Left Pane */}
             <div className="lg:flex items-center justify-center flex-1 text-black">
                 <div className="max-w-lg text-center">
