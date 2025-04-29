@@ -20,6 +20,9 @@ interface FinancialRecordContextType {
 
     updateRecord: (id: string, newRecord: FinancialRecord) => void;
     deleteRecord: (id: string) => void;
+    searchRecord: (searchValue: string) => void;
+    fetchRecords: () => void;
+    isLoading: boolean;
 }
 
 export const FinancialRecordsContext = createContext<
@@ -35,6 +38,7 @@ export const FinancialRecordsProvider = ({
   }) => {
     const [records, setRecords] = useState<FinancialRecord[]>([]);
     const { user } = useUser();
+    const [isLoading, setIsLoading] = useState(false);
     const baseUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
     const fetchRecords = async () => {
@@ -49,6 +53,34 @@ export const FinancialRecordsProvider = ({
         setRecords(records);
       }
     };
+
+
+    const searchRecord = async (query: string) => {
+      if (!user) return;
+      setIsLoading(true);
+      const userId = user?.id;
+      const response = await fetch(`${baseUrl}/financial-records/view-records?user=${encodeURIComponent(userId)}&query=${encodeURIComponent(query)}`, {
+        method: "GET",
+      });
+      console.log("Fetching data...");
+       // Simulate a delay of 2 seconds
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      try {
+        if (!response.ok) {
+          throw new Error('Failed to fetch records');
+        }
+        const data = await response.json();
+        console.log('Filtered data');
+        console.log(data);
+        setRecords(data);
+      } catch (error) {
+        console.error('There was a problem with the search operation:', error);
+      } finally {
+        setIsLoading(false);
+      }
+
+    }
 
     // we want this fetch function call on render, gonna use use effect
     useEffect(() => {
@@ -123,7 +155,7 @@ export const FinancialRecordsProvider = ({
     // inside of this is just render children
     // value are the state -> records and all the functions we created inside this provider
     return (
-    <FinancialRecordsContext.Provider value={{ records, addRecord, updateRecord, deleteRecord }}>
+    <FinancialRecordsContext.Provider value={{ records, isLoading, addRecord, updateRecord, deleteRecord, searchRecord, fetchRecords  }}>
       {""}
       {children}
     </FinancialRecordsContext.Provider>

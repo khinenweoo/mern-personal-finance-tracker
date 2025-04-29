@@ -15,6 +15,30 @@ export const getRecords = async (req: Request, res: Response) => {
     }
 };
 
+export const filterRecords = async (req: Request, res: Response) => {
+    try {
+        const userId = req.query.user; // Access the user query parameter
+        const query = req.query.query;   // Access the query parameter
+        let data = await FinancialRecordModel.find({
+            userId: userId,
+            "$or": [
+                {description: {$regex: query}},
+                {category: {$regex: query}},
+                {paymentMethod: {$regex: query}}
+            ]
+        });
+
+        if (data.length === 0) {
+            return res.status(404).send("No record match for the user.");
+        }
+
+        return res.status(200).send(data);
+
+    } catch (error)  {
+        res.status(500).send(error);
+    }
+}
+
 export const createRecord = async (req: Request, res: Response) => {
     try {
         const newRecordBody = req.body;

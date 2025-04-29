@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FinancialRecord, useFinancialRecords } from "../../contexts/financial-record-context";
 import { useTable, Column, CellProps } from "react-table";
 import { format } from 'date-fns';
@@ -47,7 +47,7 @@ const EditableCell: React.FC<EditableCellProps> = ({
 
 
 export const FinancialRecordList = () => {
-    const { records, updateRecord, deleteRecord } = useFinancialRecords();
+    const { records, isLoading, updateRecord, deleteRecord, searchRecord, fetchRecords } = useFinancialRecords();
 
     const updateCellRecord = (rowIndex: number, columnId: string, value: any) => {
         const id = records[rowIndex]._id;
@@ -130,30 +130,20 @@ export const FinancialRecordList = () => {
     ], [records]);
 
     const [ filterInput, setFilterInput ] = useState('');
-   
 
-    const filteredData = records.filter(record => {
-        let searchTerm = String(filterInput.toLowerCase());
-
-        if (searchTerm === '') {
-            return true;
+    useEffect(() => {
+        if (filterInput !== "") {
+            searchRecord(filterInput);
+        } else {
+            fetchRecords();
         }
-
-        return (
-            record.description?.toLowerCase().includes(searchTerm) ||
-            record.category?.toLowerCase().includes(searchTerm) ||
-            String(record.amount).includes(searchTerm) ||
-            record.paymentMethod?.toLowerCase().includes(searchTerm) 
-        );
+        
+    }, [filterInput]);
  
-      });
-
-
-
     const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
         columns,
-        data: filteredData,
+        data: records,
     },
 );
     
@@ -186,7 +176,13 @@ export const FinancialRecordList = () => {
                     </thead>
 
                     <tbody {...getTableBodyProps()} className="">
-                        {rows.map(row => {
+                        { isLoading && 
+                        <tr><td colSpan={6}>
+                            <div className="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-sky-600 rounded-full" role="status" aria-label="loading">
+                            <span className="sr-only">Loading...</span>
+                            </div>
+                        </td></tr>}
+                        {!isLoading && rows.map(row => {
                             prepareRow(row);
                             const { key, ...rowProps } = row.getRowProps();
                             return (
