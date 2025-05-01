@@ -10,16 +10,23 @@ export const FinancialRecordForm = () => {
   const [paymentMethod, setPaymentMethod] = useState<string>("");
   const { user } = useUser();
   const { addRecord } = useFinancialRecords();
+  const [selectedType, setSelectedType] = useState<string>('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    let transaction = 0;
+
+    if (selectedType === 'expenses') {
+      transaction = -amount;
+    }
 
     const newRecord = {
       userId: user?.id ?? "",
       date: new Date(),
       description: description,
-      amount: parseFloat(amount),
+      amount: transaction,
       category: category,
+      type: selectedType,
       paymentMethod: paymentMethod,
     };
 
@@ -31,31 +38,62 @@ export const FinancialRecordForm = () => {
     setPaymentMethod("");
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedType(event.target.value);
+  }
+
   return (
     <div className="form-container">
-      <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Add New Expense</h1>
+      <h1 className="text-gray-950 text-lg font-semibold font-sans mb-5">Add New Entry</h1>
       <form onSubmit={handleSubmit} >
         <div className="form-field">
-          <label className="text-gray-800 text-sm leading-tight tracking-normal">Amount</label>
+          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Type</label>
+          <div className="flex gap-2 space-x-2 mb-3 mt-2" role="radio-group">
+            <div className="flex items-center me-4">
+                <input 
+                type="radio" 
+                value="income"
+                checked={selectedType === 'income'} 
+                onChange={handleChange}
+                name="inline-radio-group" 
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label className="ms-2 text-sm font-medium text-gray-900">Income</label>
+            </div>
+            <div className="flex items-center me-4">
+                <input 
+                  type="radio" 
+                  value="expenses"
+                  checked={selectedType === 'expenses'}
+                  onChange={handleChange}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" 
+                />
+                <label className="ms-2 text-sm font-medium text-gray-900">Expenses</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="form-field">
+          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Amount</label>
           <input
             type="number"
             required
-            className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+            className="input mb-3 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
         <div className="form-field">
-          <label className="text-gray-800 text-sm leading-tight tracking-normal">Description</label>
+          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Description</label>
           <input
             type="text"
             required
-            className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+            className="input mb-3 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <div className="form-field">
+        {/* <div className="form-field">
           <label className="text-gray-800 text-sm leading-tight tracking-normal">Date</label>
           <div className="relative mb-5 mt-2">
             <div className="absolute left-3 text-gray-600 flex items-center pr-3 h-full cursor-pointer">
@@ -63,13 +101,13 @@ export const FinancialRecordForm = () => {
             </div>
             <input id="expiry" className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-10 text-sm border-gray-300 rounded border" placeholder="MM/YY" />
           </div>
-        </div>
+        </div> */}
         <div className="form-field">
-          <label className="text-gray-800 text-sm leading-tight tracking-normal">Category:</label>
-          <div className="relative mb-5 mt-2">
+          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Category:</label>
+          <div className="relative">
             <select
               required
-              className="input"
+              className="input mb-3 mt-2"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
@@ -89,11 +127,11 @@ export const FinancialRecordForm = () => {
           </div>
         </div>
         <div className="form-field">
-          <label className="text-gray-800 text-sm leading-tight tracking-normal">Payment Method:</label>
-          <div className="relative mb-5 mt-2">
+          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Payment Method:</label>
+          <div className="relative">
             <select
               required
-              className="input"
+              className="input mb-3 mt-2"
               value={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value)}
             >
@@ -106,7 +144,7 @@ export const FinancialRecordForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out hover:bg-indigo-500 bg-indigo-400 rounded text-white px-8 py-2 text-sm"
+          className="w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out hover:bg-indigo-500 bg-indigo-400 rounded text-white px-8 py-2 mt-2 text-md font-semibold font-sans"
         >
           Add Expense
         </button>

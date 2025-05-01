@@ -10,6 +10,7 @@ export interface FinancialRecord {
     description: string;
     amount: number;
     category: string;
+    type: string;
     paymentMethod: string;
 };
 
@@ -49,7 +50,6 @@ export const FinancialRecordsProvider = ({
   
       if (response.ok) {
         const records = await response.json();
-        console.log(records);
         setRecords(records);
       }
     };
@@ -62,7 +62,7 @@ export const FinancialRecordsProvider = ({
       const response = await fetch(`${baseUrl}/financial-records/view-records?user=${encodeURIComponent(userId)}&query=${encodeURIComponent(query)}`, {
         method: "GET",
       });
-      console.log("Fetching data...");
+
        // Simulate a delay of 2 seconds
       await new Promise((resolve) => setTimeout(resolve, 1000));
 

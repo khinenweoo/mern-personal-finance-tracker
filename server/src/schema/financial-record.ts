@@ -6,6 +6,7 @@ interface FinancialRecord {
     description: string;
     amount: number;
     category: string;
+    type: string;
     paymentMethod: string;
 }
 // define the schema
@@ -15,6 +16,7 @@ const financialRecordSchema = new mongoose.Schema<FinancialRecord>({
     description: { type: String, required: true},
     amount: { type: Number, required: true},
     category: { type: String, required: true},
+    type: {type: String, required: true},
     paymentMethod: { type: String, required: true},
 });
 

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { FinancialRecord, useFinancialRecords } from "../../contexts/financial-record-context";
 import { useTable, Column, CellProps } from "react-table";
 import { format } from 'date-fns';
+import formatToUSD from "./formatToUSD";
 
 interface EditableCellProps extends CellProps<FinancialRecord> {
     updateRecord: (rowIndex: number, columnId: string, value: any) => void;
@@ -23,6 +24,14 @@ const EditableCell: React.FC<EditableCellProps> = ({
         updateRecord(row.index, column.id, value);
     };
 
+    const valueIsIncome = () => {
+        return typeof value === "number" && value > 0;
+    }
+
+    const valueIsExpenses = () => {
+        return typeof value === "number" && value < 0;
+    }
+
     return (
         <div
             className={`editable-cell ${editable ? 'editable dark:text-gray-300 hover:text-blue-600' : 'dark:text-gray-300'}`}
@@ -37,9 +46,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
                     className="input"
                 />
             ) : (
-                <span>{typeof value === "string" ?
-                    value : value.toString()
-                }</span>
+                <span className={ valueIsIncome()? 
+                   "text-green-400" : valueIsExpenses()? "text-red-400": ""}>
+                    
+                    {typeof value === "string" ?
+                    value : formatToUSD(value)
+                    }
+                </span>
             )}
         </div>
     )
