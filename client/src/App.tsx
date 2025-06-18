@@ -25,7 +25,7 @@ function App() {
   }, [darkMode])
 
   return (
-    <Router>
+    <Router  future={{  v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className='app-container'>
         <div className='bg-neutral-100 dark:bg-slate-950 relative overflow-hidden'>
             <button 
@@ -39,7 +39,7 @@ function App() {
                 element={
                   <>
                     <SignedIn>
-                      <div className='dashboard-wrapper w-full flex'>
+                      <div className='dashboard-wrapper w-full min-h-screen flex'>
 
                         <FinancialRecordsProvider>
                         <Navbar darkMode={darkMode}/>
@@ -56,7 +56,7 @@ function App() {
               />
 
               <Route 
-                path="/auth" 
+                path="auth" 
                 element={
                   <>
                     <SignedIn>

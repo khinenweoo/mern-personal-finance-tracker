@@ -19,13 +19,31 @@ export const filterRecords = async (req: Request, res: Response) => {
     try {
         const userId = req.query.user; // Access the user query parameter
         const query = req.query.query;   // Access the query parameter
+
+        if (!userId || !query) {
+            return res.status(400).send("User ID and query parameters are required");
+        }
+
+        if (typeof query !== 'string') {
+            return res.status(400).send("Query params must be a string");
+        }
+
+        // Escape special characters in query string for regex
+        const escapedQuery = query.replace(/[-\/\\^$.*+?()[\]{}|]/g, '\\$&');
+
+        // Prepare regex for string fields with case insensitive option
+        const regex = new RegExp(escapedQuery, 'i');
+
+        let orConditions: any[] = [
+            { description: { $regex: regex } },
+            { category: { $regex: regex } },
+            { type: {$regex: regex } },
+            { paymentMethod: { $regex: regex } }
+        ];
+
         let data = await FinancialRecordModel.find({
             userId: userId,
-            "$or": [
-                {description: {$regex: query}},
-                {category: {$regex: query}},
-                {paymentMethod: {$regex: query}}
-            ]
+            $or: orConditions
         });
 
         if (data.length === 0) {
@@ -35,7 +53,8 @@ export const filterRecords = async (req: Request, res: Response) => {
         return res.status(200).send(data);
 
     } catch (error)  {
-        res.status(500).send(error);
+        console.error("Error occurred while filtering records:", error);
+        res.status(500).send("Internal Server Error");
     }
 }
 

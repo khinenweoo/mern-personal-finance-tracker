@@ -25,14 +25,22 @@ const Navbar: React.FC<{ darkMode: boolean; }> = ({ darkMode }) => {
                             </Link>
                         </div>
                         <nav className="flex flex-1 flex-col gap-y-4 pt-10">
-                            <button onClick={() => setOpen(true)} className="group rounded-xl p-4 text-gray-400 hover:bg-gray-100">
+                            <button className="group rounded-xl p-4 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i className='bx bxs-dashboard text-lg lg:text-xl'></i>
+                                <span className="text-xs mt-1 text-gray-400 block">Dashboard</span>
+                            </button>
+                            <button onClick={() => setOpen(true)} className="group rounded-xl p-4 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <i className='bx bx-plus-circle text-xl lg:text-2xl'></i>
-                                <span className="text-xs mt-1 text-gray-400 block">New Expense</span>
+                                <span className="text-xs mt-1 text-gray-400 block">New Entry</span>
                             </button>
-                            <button className="group rounded-xl p-4 text-gray-400 hover:bg-gray-100">
+                            {/* <button className="group rounded-xl p-4 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <i className='bx bx-bar-chart text-lg lg:text-xl'></i>
+                                <span className="text-xs mt-1 text-gray-400 block">Income</span>
+                            </button>
+                            <button className="group rounded-xl p-4 text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <i className='bx bxs-category text-lg lg:text-xl'></i>
-                                <span className="text-xs mt-1 text-gray-400 block">Categories</span>
-                            </button>
+                                <span className="text-xs mt-1 text-gray-400 block">Expenses</span>
+                            </button> */}
 
                             <button className={`mt-2 ${open ? "invisible" : "visible"}`}>
                                 <SignedIn>

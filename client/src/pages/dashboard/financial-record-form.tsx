@@ -18,7 +18,11 @@ export const FinancialRecordForm = () => {
 
     if (selectedType === 'expenses') {
       transaction = -amount;
+    } else {
+      transaction = +amount;
     }
+
+    console.log("transaction amount: ", transaction);
 
     const newRecord = {
       userId: user?.id ?? "",

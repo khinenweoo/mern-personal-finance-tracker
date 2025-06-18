@@ -62,17 +62,15 @@ export const FinancialRecordsProvider = ({
       const response = await fetch(`${baseUrl}/financial-records/view-records?user=${encodeURIComponent(userId)}&query=${encodeURIComponent(query)}`, {
         method: "GET",
       });
-
        // Simulate a delay of 2 seconds
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       try {
         if (!response.ok) {
           throw new Error('Failed to fetch records');
         }
         const data = await response.json();
-        console.log('Filtered data');
-        console.log(data);
+
         setRecords(data);
       } catch (error) {
         console.error('There was a problem with the search operation:', error);
@@ -101,10 +99,10 @@ export const FinancialRecordsProvider = ({
           if (response.ok) {
             const newRecord = await response.json();
             setRecords((prev) =>  [...prev, newRecord]);
-            toast.success(`New expense added successfully`);
+            toast.success(`New entry is added successfully`);
           }
         } catch (err) {
-            toast.error("Failed to add new expense!");
+            toast.error("Failed to add new entry!");
         }
 
     };
