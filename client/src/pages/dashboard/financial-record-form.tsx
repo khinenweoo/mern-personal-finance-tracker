@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import { useFinancialRecords } from "../../contexts/financial-record-context";
+import toast from 'react-hot-toast';
 
 export const FinancialRecordForm = () => {
 
@@ -16,13 +17,16 @@ export const FinancialRecordForm = () => {
     event.preventDefault();
     let transaction = 0;
 
+    if (selectedType == "") {
+      toast.error("Please choose the Type.");
+      return;
+    }
+
     if (selectedType === 'expenses') {
       transaction = -amount;
     } else {
       transaction = +amount;
     }
-
-    console.log("transaction amount: ", transaction);
 
     const newRecord = {
       userId: user?.id ?? "",
