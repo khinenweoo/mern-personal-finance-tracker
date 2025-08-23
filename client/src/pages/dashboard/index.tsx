@@ -50,7 +50,7 @@ export const Dashboard = () => {
     }, [records]);
 
     return (
-        <div className="dashboard-container w-[89%] p-8 flex-1">
+        <div className="dashboard-container w-[80%] p-10 flex-1">
             <div className="w-full mx-auto overflow-hidden mb-6 p-4">
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 gap-6 w-full min-w-0">
 

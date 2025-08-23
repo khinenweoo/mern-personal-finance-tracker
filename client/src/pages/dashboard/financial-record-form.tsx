@@ -3,7 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useFinancialRecords } from "../../contexts/financial-record-context";
 import toast from 'react-hot-toast';
 
-export const FinancialRecordForm = () => {
+export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCancel }) => {
 
   const [description, setDescription] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
@@ -150,12 +150,15 @@ export const FinancialRecordForm = () => {
             </select>
           </div>
         </div>
-        <button
-          type="submit"
-          className="w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out hover:bg-indigo-500 bg-indigo-400 rounded text-white px-8 py-2 mt-2 text-md font-semibold font-sans"
-        >
-          Add Expense
-        </button>
+        <div className="mt-4 sm:flex sm:items-center sm:-mx-2">
+          <button type="button" onClick={onCancel} className="w-full px-4 py-2 text-sm font-medium tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md sm:w-1/2 sm:mx-2 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40">
+            Cancel
+          </button>
+
+          <button type="submit" className="w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-indigo-500 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
+            Add Entry
+          </button>
+        </div>
       </form>
     </div>
   );

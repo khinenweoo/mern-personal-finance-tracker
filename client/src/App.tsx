@@ -4,7 +4,8 @@ import { Dashboard } from './pages/dashboard';
 import { Auth } from './pages/auth';
 import { FinancialRecordsProvider } from './contexts/financial-record-context';
 import { SignedIn, SignedOut } from '@clerk/clerk-react';
-import Navbar from './components/navbar';
+import Sidebar from './components/sidebar';
+import UserProfilePage from './pages/auth/user-profile';
 import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 
@@ -27,12 +28,12 @@ function App() {
   return (
     <Router  future={{  v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className='app-container'>
-        <div className='bg-neutral-100 dark:bg-slate-950 relative overflow-hidden'>
-            <button 
-              onClick={toggleDarkMode}
-              className='fixed top-3 lg:top-4 right-3 lg:right-4 w-9 h-9 lg:w-10 lg:h-10 flex justify-center items-center rounded-xl bg-amber-100 dark:bg-gray-700 text-neutrak-950 shadow-lg transition-colors'>
-              <i className={`bx bx-${darkMode ? 'sun text-amber-200': 'moon'} text-lg lg:text-xl`}></i>
-            </button>
+        <div className='relative bg-neutral-100 dark:bg-slate-950 w-full'>
+          <button
+            onClick={toggleDarkMode}
+            className='fixed top-3 lg:top-4 right-3 lg:right-4 w-9 h-9 lg:w-10 lg:h-10 flex justify-center items-center rounded-xl bg-amber-100 dark:bg-gray-700 text-neutrak-950 shadow-lg transition-colors'>
+            <i className={`bx bx-${darkMode ? 'sun text-amber-200' : 'moon'} text-lg lg:text-xl`}></i>
+          </button>
             <Routes>
               <Route
                 path="/"
@@ -40,9 +41,8 @@ function App() {
                   <>
                     <SignedIn>
                       <div className='dashboard-wrapper w-full min-h-screen flex'>
-
                         <FinancialRecordsProvider>
-                        <Navbar darkMode={darkMode}/>
+                          <Sidebar darkMode={darkMode} />
                           <Dashboard />
                         </FinancialRecordsProvider>
                       </div>
@@ -68,6 +68,25 @@ function App() {
                   </>
                 } 
               />
+
+            <Route
+              path='/profile'
+              element={
+                <>
+                  <SignedIn>
+                    <div className='dashboard-wrapper w-full min-h-screen flex'>
+                      <FinancialRecordsProvider>
+                        <Sidebar darkMode={darkMode} />
+                        <UserProfilePage />
+                      </FinancialRecordsProvider>
+                    </div>
+                  </SignedIn>
+                  <SignedOut>
+                    <Navigate to="/auth" replace />
+                  </SignedOut>
+                </>
+              }
+            />
             </Routes>
         </div>
       </div>

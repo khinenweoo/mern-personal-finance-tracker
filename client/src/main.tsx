@@ -3,18 +3,24 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import {ClerkProvider} from "@clerk/clerk-react";
+import { dark } from '@clerk/themes';
 import 'boxicons';
 
 
-const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-if (!clerkPubKey) {
+if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publisable Key");
 }
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ClerkProvider publishableKey={clerkPubKey}>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+      }}
+      publishableKey={PUBLISHABLE_KEY}
+    >
       <App />
     </ClerkProvider>
   </StrictMode>,
