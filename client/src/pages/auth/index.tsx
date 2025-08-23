@@ -1,7 +1,7 @@
 import './auth.css';
-import Header from './layout/partials/header';
-import Feature from './layout/partials/feature';
-import Footer from './layout/partials/footer';
+import Header from './layout/partials/Header';
+import Feature from './layout/partials/Feature';
+import Footer from './layout/partials/Footer';
 
 export const Auth = () => {
     return (

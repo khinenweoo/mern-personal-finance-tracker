@@ -4,7 +4,7 @@ import { Dashboard } from './pages/dashboard';
 import { Auth } from './pages/auth';
 import { FinancialRecordsProvider } from './contexts/financial-record-context';
 import { SignedIn, SignedOut } from '@clerk/clerk-react';
-import Sidebar from './components/sidebar';
+import Sidebar from './components/Sidebar';
 import UserProfilePage from './pages/auth/user-profile';
 import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";

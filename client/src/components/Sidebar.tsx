@@ -19,7 +19,7 @@ const Sidebar: React.FC<{ darkMode: boolean; }> = ({ darkMode }) => {
         <>
             <div className="relative w-auto hidden md:block border-r bg-white dark:bg-slate-800 border-gray-200 dark:border-gray-600">
                 <div className="text-gray-900">
-                    <aside className="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white rtl:border-r-0 dark:bg-gray-900 dark:border-gray-700">
+                    <aside className="flex flex-col w-64 h-screen px-4 py-8 overflow-y-auto bg-white rtl:border-r-0 dark:bg-gray-800 dark:border-gray-700">
                         <a href="#" className="mx-auto">
                             <Link to="/">
                                 <Img
