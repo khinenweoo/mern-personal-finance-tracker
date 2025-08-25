@@ -34,6 +34,9 @@
   opacity: 0.9;
 }
 
+.page-heading {
+  color: #1f2c73;
+}
 
 /* Table styles */
 .table-container {

@@ -52,7 +52,7 @@ export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCan
 
   return (
     <div className="form-container">
-      <h1 className="text-gray-950 text-lg font-semibold font-sans mb-5">Add New Entry</h1>
+      <h1 className="text-gray-950 dark:text-gray-200 text-lg font-semibold font-sans mb-2">Add New Entry</h1>
       <form onSubmit={handleSubmit} >
         <div className="form-field">
           <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Type</label>
@@ -66,7 +66,7 @@ export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCan
                 name="inline-radio-group" 
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
-                <label className="ms-2 text-sm font-medium text-gray-900">Income</label>
+              <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-200">Income</label>
             </div>
             <div className="flex items-center me-4">
                 <input 
@@ -76,13 +76,13 @@ export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCan
                   onChange={handleChange}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" 
                 />
-                <label className="ms-2 text-sm font-medium text-gray-900">Expenses</label>
+              <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-200">Expenses</label>
             </div>
           </div>
         </div>
 
         <div className="form-field">
-          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Amount</label>
+          <label className="text-gray-900 dark:text-gray-200 font-semibold font-sans text-sm leading-tight tracking-normal">Amount</label>
           <input
             type="number"
             required
@@ -92,7 +92,7 @@ export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCan
           />
         </div>
         <div className="form-field">
-          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Description</label>
+          <label className="text-gray-900 dark:text-gray-200 font-semibold font-sans text-sm leading-tight tracking-normal">Description</label>
           <input
             type="text"
             required
@@ -111,7 +111,7 @@ export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCan
           </div>
         </div> */}
         <div className="form-field">
-          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Category:</label>
+          <label className="text-gray-900 dark:text-gray-200 font-semibold font-sans text-sm leading-tight tracking-normal">Category:</label>
           <div className="relative">
             <select
               required
@@ -135,7 +135,7 @@ export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCan
           </div>
         </div>
         <div className="form-field">
-          <label className="text-gray-900 font-semibold font-sans text-sm leading-tight tracking-normal">Payment Method:</label>
+          <label className="text-gray-900 dark:text-gray-200 font-semibold font-sans text-sm leading-tight tracking-normal">Payment Method:</label>
           <div className="relative">
             <select
               required
@@ -143,7 +143,7 @@ export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCan
               value={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value)}
             >
-              <option value="">Select a Payment Method</option>
+              <option value="" className="">Select a Payment Method</option>
               <option value="Cash">Cash</option>
               <option value="Mobile Banking">Mobile Banking</option>
               <option value="Bank Transfer">Bank Transfer</option>
@@ -155,7 +155,7 @@ export const FinancialRecordForm: React.FC<{ onCancel: () => void; }> = ({ onCan
             Cancel
           </button>
 
-          <button type="submit" className="w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-indigo-500 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
+          <button type="submit" className="w-full px-4 py-2 mt-3 text-sm font-medium tracking-wide text-gray-200 capitalize transition-colors duration-300 transform bg-indigo-500 rounded-md sm:mt-0 sm:w-1/2 sm:mx-2 hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40">
             Add Entry
           </button>
         </div>

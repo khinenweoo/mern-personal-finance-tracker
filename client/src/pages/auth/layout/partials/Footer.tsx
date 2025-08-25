@@ -50,10 +50,10 @@ const Footer = () => {
                             </div>
 
                             <div>
-                                <h3 className="dark:text-gray-300uppercase text-white">Products</h3>
-                                <a href="#" className="block mt-2 text-sm dark:text-gray-500 text-gray-400 hover:underline">Mega cloud</a>
-                                <a href="#" className="block mt-2 text-sm dark:text-gray-500 text-gray-400 hover:underline">Aperion UI</a>
-                                <a href="#" className="block mt-2 text-sm dark:text-gray-500 text-gray-400 hover:underline">Meraki UI</a>
+                                <h3 className="dark:text-gray-300uppercase text-white">Quick Links</h3>
+                                <a href="#" className="block mt-2 text-sm dark:text-gray-500 text-gray-400 hover:underline">Testimonial</a>
+                                <a href="#" className="block mt-2 text-sm dark:text-gray-500 text-gray-400 hover:underline">Category</a>
+                                <a href="#" className="block mt-2 text-sm dark:text-gray-500 text-gray-400 hover:underline">Contact</a>
                             </div>
 
                             <div>

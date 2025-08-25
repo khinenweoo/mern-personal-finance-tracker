@@ -43,14 +43,22 @@ export const FinancialRecordsProvider = ({
     const baseUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 
     const fetchRecords = async () => {
-      if (!user) return;
-      const response = await fetch(
-        `${baseUrl}/financial-records/getAllByUserID/${user.id}`
-      );
-  
-      if (response.ok) {
+      if (!user) return;  
+      try {
+        const response = await fetch(
+          `${baseUrl}/financial-records/getAllByUserID/${user.id}`
+        );
+        if (!response.ok) throw new Error("Failed to fetch");
+
         const records = await response.json();
-        setRecords(records);
+        if (records.length === 0) {
+          setRecords([]);
+        } else {
+          setRecords(records);
+        }
+
+      } catch (error) {
+        console.error("Error fetching records:", error);
       }
     };
 

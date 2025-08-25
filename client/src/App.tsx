@@ -29,11 +29,6 @@ function App() {
     <Router  future={{  v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className='app-container'>
         <div className='relative bg-neutral-100 dark:bg-slate-950 w-full'>
-          <button
-            onClick={toggleDarkMode}
-            className='fixed top-3 lg:top-4 right-3 lg:right-4 w-9 h-9 lg:w-10 lg:h-10 flex justify-center items-center rounded-xl bg-amber-100 dark:bg-gray-700 text-neutrak-950 shadow-lg transition-colors'>
-            <i className={`bx bx-${darkMode ? 'sun text-amber-200' : 'moon'} text-lg lg:text-xl`}></i>
-          </button>
             <Routes>
               <Route
                 path="/"
@@ -44,6 +39,13 @@ function App() {
                         <FinancialRecordsProvider>
                           <Sidebar darkMode={darkMode} />
                           <Dashboard />
+                          <div className='flex mx-2'>
+                            <button
+                              onClick={toggleDarkMode}
+                              className='fixed top-3 right-4 lg:right-8 w-9 h-9 lg:w-10 lg:h-10 rounded-xl bg-amber-100 dark:bg-gray-700 text-neutrak-950 shadow-lg transition-colors'>
+                              <i className={`bx bx-${darkMode ? 'sun text-amber-200' : 'moon'} text-lg lg:text-xl`}></i>
+                            </button>
+                          </div>
                         </FinancialRecordsProvider>
                       </div>
                       <Toaster position="top-right" />

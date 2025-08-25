@@ -4,14 +4,11 @@ import express, { Request, Response } from "express";
 export const getRecords = async (req: Request, res: Response) => {
     try {
         const userId = req.params.userId;
-        const records = await FinancialRecordModel.find({userId: userId});
-
-        if (records.length === 0) {
-            return res.status(404).send("No records found for the user.");
-        }
+        const records = await FinancialRecordModel.find({ userId });
+        // return 200 with array event if empty data
         res.status(200).send(records);
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send({ error: "Internal Server Error" });
     }
 };
 
