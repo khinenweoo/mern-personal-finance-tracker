@@ -65,7 +65,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="block h-px my-6 bg-gray-200 border-none dark:bg-gray-700"></div>
+                <div className="block h-px my-8 bg-gray-700 border-none"></div>
 
                     <div>
                     <p className="text-center text-gray-500 text-gray-400">© 2025 smartspender. All rights reserved.</p>

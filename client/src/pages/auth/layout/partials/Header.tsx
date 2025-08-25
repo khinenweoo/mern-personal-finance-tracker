@@ -72,7 +72,7 @@ const Header = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="w-full lg:max-w-sm mt-6 flex justify-left">
+                        <div className="w-full lg:max-w-sm flex justify-left">
                             <a href="#" className="px-10 py-4 mt-6 text-sm font-medium leading-5 text-center text-white capitalize transition-colors duration-300 transform bg-gray-900 rounded-lg hover:bg-gray-600 lg:mx-0 lg:w-auto focus:outline-none">Get Started</a>
                         </div>
                     </div>
